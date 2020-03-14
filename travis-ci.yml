@@ -1,0 +1,13 @@
+dist: bionic
+
+language: nodejs
+node_js:
+  - 12
+
+services:
+  - docker
+
+before_install:
+  - echo $TRAVIS_BUILD_ID
+  - docker build -t hello_node:$TRAVIS_BUILD_ID .
+
