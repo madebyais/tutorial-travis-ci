@@ -21,4 +21,4 @@ before_install:
 install:
   - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
   - docker push $DOCKER_HUB_USERNAME/hello-node:$CI_COMMIT
-  - ssh root@$DEPLOYMENT_HOST "docker pull $DOCKER_HUB_USERNAME/hello-node:$CI_COMMIT"
+  - ssh $DEPLOYMENT_HOST "docker pull $DOCKER_HUB_USERNAME/hello-node:$CI_COMMIT"
