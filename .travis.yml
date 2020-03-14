@@ -9,9 +9,10 @@ services:
 
 before_install:
   - echo $TRAVIS_BUILD_ID
+  - echo $TRAVIS_COMMIT
   - docker build -t madebyais/hello-node:$TRAVIS_BUILD_ID .
   - docker images
 
 install:
-  - docker login -u $DOCKER_HUB_USERNAME -p DOCKER_HUB_PASSWORD
+  - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
   - docker push madebyais/hello-node:$TRAVIS_BUILD_ID
