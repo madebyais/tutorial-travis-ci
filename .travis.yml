@@ -10,7 +10,7 @@ services:
 before_install:
   - export CI_COMMIT=$(echo ${TRAVIS_COMMIT:0:8})
   - echo $CI_COMMIT
-  - docker build -t madebyais/hello-node:$CI_COMMIT .
+  - docker build -t $DOCKER_HUB_USERNAME/hello-node:$CI_COMMIT .
   - docker images
   - 'which ssh-agent || (sudo apt-get update -y && sudo apt-get install -y openssh-client)'
   - eval $(ssh-agent -s)
@@ -20,5 +20,5 @@ before_install:
 
 install:
   - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
-  - docker push madebyais/hello-node:$CI_COMMIT
-  - ssh $DEPLOYMENT_HOST "docker pull madebyais/hello-node:$CI_COMMIT"
+  - docker push $DOCKER_HUB_USERNAME/hello-node:$CI_COMMIT
+  - ssh $DEPLOYMENT_HOST "docker pull $DOCKER_HUB_USERNAME/hello-node:$CI_COMMIT"
